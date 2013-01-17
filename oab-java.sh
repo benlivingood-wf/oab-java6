@@ -4,7 +4,7 @@
 # See the file "LICENSE" for the full license governing this code.
 
 # References
-#  - https://github.com/rraptorr/sun-java6
+#  - https://github.com/benlivingood-wf/sun-java6
 #  - http://ubuntuforums.org/showthread.php?t=1090731
 #  - http://irtfweb.ifa.hawaii.edu/~lockhart/gpg/gpg-cs.html
 
@@ -237,8 +237,8 @@ function usage() {
     echo "This script is merely a wrapper for the most excellent Debian packaging"
     echo "scripts prepared by Janusz Dziemidowicz."
     echo
-    echo "* https://github.com/rraptorr/sun-java6"
-    echo "* https://github.com/rraptorr/oracle-java7"    
+    echo "* https://github.com/benlivingood-wf/sun-java6"
+    echo "* https://github.com/benlivingood-wf/oracle-java7"    
     echo
     echo "The basic execution steps are:"
     echo
@@ -246,7 +246,7 @@ function usage() {
     echo "* Install the tools required to build the Java packages."
     echo "* Create download cache in ``${WORK_PATH}/pkg``."
     echo "* Download the i586 and x64 Java install binaries from Oracle. Yes, both are required."
-    echo "* Clone the build scripts from https://github.com/rraptorr/"
+    echo "* Clone the build scripts from https://github.com/benlivingood-wf/"
     echo "* Build the Java packages applicable to your system."    
     echo "* Create local ``apt`` repository in ``${WORK_PATH}/deb`` for the newly built Java Packages."
     echo "* Create a GnuPG signing key in ``${WORK_PATH}/gpg`` if none exists."
@@ -406,15 +406,15 @@ chmod 0700 ${WORK_PATH}/gpg 2>/dev/null
 
 if [ -d ${WORK_PATH}/srcs/${JAVA_UPSTREAM}.git ]; then
     # Update the code
-    ncecho " [x] Updating from https://github.com/rraptorr/${JAVA_UPSTREAM} "
+    ncecho " [x] Updating from https://github.com/benlivingood-wf/${JAVA_UPSTREAM} "
     cd ${WORK_PATH}/srcs/${JAVA_UPSTREAM}.git/ >> "$log" 2>&1
     git fetch >> "$log" 2>&1 &
     pid=$!;progress $pid
 else
     # Mirror the code
-    ncecho " [x] Mirroring https://github.com/rraptorr/${JAVA_UPSTREAM} "
+    ncecho " [x] Mirroring https://github.com/benlivingood-wf/${JAVA_UPSTREAM} "
     cd ${WORK_PATH}/srcs/ >> "$log" 2>&1
-    git clone --mirror https://github.com/rraptorr/${JAVA_UPSTREAM} >> "$log" 2>&1 &
+    git clone --mirror https://github.com/benlivingood-wf/${JAVA_UPSTREAM} >> "$log" 2>&1 &
     pid=$!;progress $pid
 fi
 
@@ -536,7 +536,7 @@ if [ -n "${SKIP_REBUILD}" -a -r "${WORK_PATH}/deb/${JAVA_DEV}${JAVA_VER}_${NEW_V
 fi
 
 # Genereate a build message
-BUILD_MESSAGE="Automated build for ${LSB_REL} using https://github.com/rraptorr/${JAVA_UPSTREAM}"
+BUILD_MESSAGE="Automated build for ${LSB_REL} using https://github.com/benlivingood-wf/${JAVA_UPSTREAM}"
 
 # Change directory to the build directory
 cd ${WORK_PATH}/src
